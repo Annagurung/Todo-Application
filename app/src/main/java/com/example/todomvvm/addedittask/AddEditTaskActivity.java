@@ -59,6 +59,8 @@ public class AddEditTaskActivity extends AppCompatActivity implements TimePicker
     long reminder;
     long reminderDate;
 
+    Calendar commonCalendar;
+
     private int userId;
 
     private int mTaskId = DEFAULT_TASK_ID;
@@ -124,7 +126,7 @@ public class AddEditTaskActivity extends AppCompatActivity implements TimePicker
             }
         });
 
-
+        commonCalendar = Calendar.getInstance();
     }
 
     @Override
@@ -136,6 +138,9 @@ public class AddEditTaskActivity extends AppCompatActivity implements TimePicker
         calendar.set(Calendar.MINUTE, minute);
         calendar.set(Calendar.SECOND, 0);
         reminder = calendar.getTimeInMillis();
+        commonCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+        commonCalendar.set(Calendar.MINUTE, minute);
+        commonCalendar.set(Calendar.SECOND, 0);
     }
 
     @Override
@@ -147,6 +152,9 @@ public class AddEditTaskActivity extends AppCompatActivity implements TimePicker
         calendar.set(Calendar.MONTH, month);
         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
         reminderDate = calendar.getTimeInMillis();
+        commonCalendar.set(Calendar.YEAR, year);
+        commonCalendar.set(Calendar.MONTH, month);
+        commonCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
     }
 
     @Override
@@ -210,7 +218,7 @@ public class AddEditTaskActivity extends AppCompatActivity implements TimePicker
             intent.putExtra("message", description);
             PendingIntent pendingIntent = PendingIntent.getBroadcast(AddEditTaskActivity.this, 1, intent, 0);
             AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-            alarmManager.setExact(AlarmManager.RTC_WAKEUP, reminder, pendingIntent);
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, commonCalendar.getTimeInMillis(), pendingIntent);
         } else {
             todo.setId(mTaskId);
             viewModel.updateTask(todo);
