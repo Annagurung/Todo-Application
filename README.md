@@ -31,3 +31,11 @@ The user can delete the tody by swiping the todo from the list left or right.
 * Notification: <br/>
 If the notification reminder is set for the todo, then, the user is notified on specified date and time as android notification.
 ![User Registration](screenshot/9.jpg)
+---
+### References
+* https://developer.android.com/reference/android/app/Activity
+* https://developer.android.com/topic/libraries/architecture/room
+* https://developer.android.com/reference/android/widget/DatePicker
+* https://developer.android.com/reference/android/widget/TimePicker
+* https://developer.android.com/training/notify-user/build-notification
+* https://developer.android.com/reference/java/text/SimpleDateFormat
